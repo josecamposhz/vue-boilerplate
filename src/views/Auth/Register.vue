@@ -70,7 +70,7 @@ export default {
             text: "Usuario creado con exito",
             color: "success",
           });
-          this.$router.push("/login");
+          this.$router.push("/auth/login");
         })
         .catch((error) => {
           this.setSnack({

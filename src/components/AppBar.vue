@@ -28,7 +28,7 @@
         <v-icon class="hidden-sm-and-up">mdi-account-plus</v-icon>
       </v-btn>
 
-      <v-btn v-if="isAdmin" class="ml-2" text to="/users">
+      <v-btn v-if="isAdmin" class="ml-2" text to="/admin/users">
         <span class="hidden-sm-and-down">Usuarios</span>
         <v-icon class="hidden-sm-and-up">mdi-account-plus</v-icon>
       </v-btn>
