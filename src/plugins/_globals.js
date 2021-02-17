@@ -6,7 +6,7 @@ const requireComponent = require.context(
   // La ruta relativa de la carpeta de componentes
   '@/components',
   // Si mirar o no en las subcarpetas
-  false,
+  true,
   // La expresión regular utilizada para hacer coincidir los nombres de los componentes básicos de los ficheros
   /\.(vue|js)$/
 )

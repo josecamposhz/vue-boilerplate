@@ -11,29 +11,48 @@ const routes = [
     component: () => import('../views/Home'),
   },
   {
-    path: '/auth/login',
-    name: 'Login',
-    component: () => import('../views/Auth/Login')
-  },
-  {
-    path: '/auth/register',
-    name: 'Register',
-    component: () => import('../views/Auth/Register')
+    path: '/auth',
+    component: () => import('../layouts/Default'),
+    children: [
+      {
+        path: 'login',
+        name: 'Login',
+        component: () => import('../views/Auth/Login'),
+      },
+      {
+        path: 'register',
+        name: 'Register',
+        component: () => import('../views/Auth/Register'),
+      },
+      {
+        path: 'forgot-password',
+        name: 'Forgot Pasword',
+        component: () => import('../views/Auth/ForgotPassword'),
+      },
+      {
+        path: 'reset-password',
+        name: 'Reset Pasword',
+        component: () => import('../views/Auth/ResetPassword'),
+      },
+      {
+        path: 'verify-email',
+        name: 'Verify Email',
+        component: () => import('../views/Auth/VerifyEmail'),
+      }
+    ]
   },
   {
     path: '/admin',
-    component: () => import('../layouts/AdminLayout'),
+    component: () => import('../layouts/Default'),
     beforeEnter: (to, from, next) => {
       if (store.getters.isAdmin) next()
       else next('/profile')
-    },
-    meta: {
-      requiresAuth: true
     },
     children: [
       {
         path: 'users',
         component: () => import('../views/Admin/Users'),
+        meta: { requiresAuth: true },
       }
     ]
   },
@@ -59,18 +78,15 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   // La ruta requiere autentificación
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.isAuth) {
-      next();
-    } else {
-      next({ name: 'Login' });
-    }
+    if (store.getters.isAuth) next();
+    else next({ name: 'Login' });
   } else {
-    // Evitamos que un usuario logeado ingrese a la vista de Login o Registro
-    if (store.getters.isAuth && (to.name === 'Login' || to.name === 'Register')) {
+    // Evitamos que un usuario logeado ingrese a alguna vista con el path auth
+    if (store.getters.isAuth && to.path.includes('auth')) {
+      // En caso de ser así enviamos al usuario al Home
       next({ name: 'Home' });
-    } else {
-      next();
     }
+    else next();
   }
 });
 

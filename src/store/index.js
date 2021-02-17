@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import User from '@/models/User'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
     state: {
-        user: JSON.parse(localStorage.getItem("user")),
+        user: localStorage.getItem("user") ? new User(JSON.parse(localStorage.getItem("user"))) : null,
         isLoading: true,
         snackbar: {
             isOpen: false,
@@ -26,7 +27,7 @@ const store = new Vuex.Store({
     },
     mutations: {
         setUser(state, user) {
-            state.user = user
+            state.user = new User(user)
         },
         setSnack(state, { isOpen, text, color }) {
             state.snackbar.isOpen = isOpen;

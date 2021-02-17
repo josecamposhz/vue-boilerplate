@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height" fluid>
     <v-row align="center" justify="center">
-      <v-col cols="10" sm="6" md="3">
+      <v-col cols="10" sm="8" md="4">
         <v-card class="elevation-12 text-center">
           <v-toolbar color="primary" dark flat>
             <v-toolbar-title>Iniciar Sesión</v-toolbar-title>
@@ -23,11 +23,15 @@
                 v-model="credenciales.password"
                 placeholder="Contraseña"
                 prepend-icon="mdi-lock"
-                type="password"
+                :type="showPassword ? 'text' : 'password'"
+                @click:append="showPassword = !showPassword"
               />
-              <v-btn color="primary" style="margin: auto" type="submit"
-                >Ingresar</v-btn
-              >
+              <v-btn text color="primary" class="mr-4" to="/auth/forgot-password">
+                ¿Olvidaste tu contraseña?
+              </v-btn>
+              <v-btn color="primary" class="m-auto" type="submit">
+                Ingresar
+              </v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -49,6 +53,7 @@ export default {
         email: "",
         password: "",
       },
+      showPassword: false,
       snackbar: {
         isOpen: false,
         text: "",

@@ -34,9 +34,9 @@
               />
             </v-form>
             <v-btn class="m-auto mr-1" @click="clearForm()">Limpiar</v-btn>
-            <v-btn color="success" class="m-auto ml-1" @click="crearUsuario()"
-              >Registro</v-btn
-            >
+            <v-btn color="success" class="m-auto ml-1" @click="crearUsuario()">
+              Registro
+            </v-btn>
           </v-card-text>
         </v-card>
       </v-col>
@@ -81,12 +81,7 @@ export default {
         });
     },
     clearForm() {
-      this.user = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-      };
+      this.$refs.form.reset();
     },
   },
 };

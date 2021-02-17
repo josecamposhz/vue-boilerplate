@@ -2,7 +2,7 @@
   <v-app-bar app color="primary" dark>
     <div class="d-flex align-center">
       <router-link to="/">
-        <span class="headline ">Vuejs</span>
+        <span class="headline white--text">VueApp</span>
       </router-link>
     </div>
 
@@ -51,7 +51,7 @@ export default {
   methods: {
     ...mapMutations(["setUser"]),
     logout() {
-      this.setUser(null);
+      this.setUser({});
       localStorage.clear();
       location.reload();
     },

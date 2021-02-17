@@ -1,6 +1,13 @@
 <template>
-  <v-card flat class="px-6">
-    <v-card-text>
+  <v-container>
+    <h1 class="mb-4">Usuarios</h1>
+    <v-col cols="12">
+      <v-row>
+        <v-spacer />
+        <AdminNewUser />
+      </v-row>
+    </v-col>
+    <v-col cols="12">
       <v-data-table
         :headers="headers"
         :items="users"
@@ -13,8 +20,8 @@
       <div class="text-center pt-2">
         <v-pagination v-model="page" :length="pageCount"></v-pagination>
       </div>
-    </v-card-text>
-  </v-card>
+    </v-col>
+  </v-container>
 </template>
 
 <script>
@@ -35,7 +42,6 @@ export default {
         { text: "Apellidos", value: "lastName" },
         { text: "Email", value: "email" },
         { text: "Rol", value: "role" },
-        { text: "Fecha Registro", value: "created" },
       ],
       users: [],
     };
